@@ -6,7 +6,7 @@ const nextConfig = {
     unoptimized: true,
   },
   // Configure static generation
-  distDir: '.next',
+  distDir: 'out',
   // Handle trailing slashes
   trailingSlash: true,
 };

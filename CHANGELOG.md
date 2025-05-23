@@ -238,3 +238,17 @@ n-place-animal/
 - Next.js version: 14.2.29
 - Tailwind CSS version: 4.0.0
 - React version: 18 
+
+## [2024-02-20] - Netlify Static Export Configuration
+
+### Changed
+- Updated Next.js configuration for static export
+- Modified Netlify deployment settings
+- Removed @netlify/plugin-nextjs in favor of static export
+- Updated build configuration in netlify.toml
+
+### Technical Details
+- Set output to 'export' in next.config.mjs
+- Changed publish directory to 'out'
+- Added NETLIFY_NEXT_PLUGIN_SKIP environment variable
+- Simplified build process for static deployment 
