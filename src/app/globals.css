@@ -1,5 +1,9 @@
-@import "tailwindcss";
+/* tailwind directives */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
+/* custom css */
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -17,7 +21,8 @@ body {
   color: var(--foreground);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
-/* Container utility */
+
+/* container styles */
 .container {
   margin-left: auto;
   margin-right: auto;
@@ -26,15 +31,8 @@ body {
   max-width: 80rem;
 }
 
-@layer components {
-  .container {
-    @apply mx-auto px-4 max-w-7xl;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* utility classes */
+.text-balance {
+  text-wrap: balance;
 }
 

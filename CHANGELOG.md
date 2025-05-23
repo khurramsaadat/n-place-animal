@@ -252,3 +252,104 @@ n-place-animal/
 - Changed publish directory to 'out'
 - Added NETLIFY_NEXT_PLUGIN_SKIP environment variable
 - Simplified build process for static deployment 
+
+## [0.2.0] - 2024-05-23
+
+### Fixed
+- Fixed TypeScript errors in search.ts by properly typing the WordDictionary
+- Updated ESLint configuration with proper TypeScript support
+- Fixed build issues by installing and configuring ESLint dependencies
+- Cleaned up project structure and removed problematic files
+
+### Added
+- Added more sample data for name, place, animal, and thing categories
+- Added proper TypeScript type definitions for the game's word categories
+
+### Changed
+- Updated Next.js configuration for static export
+- Simplified TypeScript types in search functionality
+- Updated ESLint rules for better TypeScript support 
+
+## [0.2.1] - 2024-05-23
+
+### Fixed
+- Fixed CSS linting issues in globals.css
+- Properly organized CSS within Tailwind layers
+- Updated Tailwind configuration for better utility handling
+- Improved container styles using Tailwind's built-in container configuration
+
+### Changed
+- Refactored global styles to use proper Tailwind layer directives
+- Updated container styles to use @apply directive
+- Enhanced theme configuration in tailwind.config.js 
+
+## [0.2.2] - 2024-05-23
+
+### Fixed
+- Fixed CSS validation errors in globals.css
+- Changed Tailwind directives to use @import statements
+- Added proper VSCode settings for CSS validation
+- Updated PostCSS configuration with import plugin
+
+### Added
+- Added .vscode/settings.json for better CSS tooling
+- Added postcss-import plugin
+- Added better CSS comments and organization
+
+### Changed
+- Refactored globals.css to use standard CSS syntax
+- Updated container styles to use standard CSS properties
+- Enhanced PostCSS configuration 
+
+## [0.2.3] - 2024-05-23
+
+### Fixed
+- Fixed JSON parsing error in Next.js manifest
+- Cleaned up webpack cache issues
+- Resolved TypeScript configuration warnings
+- Fixed Next.js configuration for proper static export
+
+### Changed
+- Updated Next.js configuration with proper static export settings
+- Enhanced build configuration for better performance
+- Cleaned npm and Next.js caches for fresh build
+
+### Security
+- Added security headers in Next.js configuration
+- Disabled powered by header 
+
+## [0.2.4] - 2024-05-23
+
+### Fixed
+- Fixed TypeScript type definition errors
+- Added missing @types packages for json5, prop-types, and react
+- Created custom type declarations for global types
+- Updated TypeScript configuration
+
+### Added
+- Added types directory with global type declarations
+- Added proper TypeScript type definitions
+- Enhanced type checking configuration
+
+### Changed
+- Updated TypeScript compiler options
+- Improved type resolution settings 
+
+## [0.2.5] - 2024-05-23
+
+### Fixed
+- Fixed React and PropTypes type definition errors
+- Updated all dependencies to their latest compatible versions
+- Synchronized type definition versions with their corresponding packages
+- Fixed version mismatches in package.json
+
+### Changed
+- Updated React to version 18.2.0
+- Updated React DOM to version 18.2.0
+- Updated TypeScript to version 5.3.3
+- Updated ESLint and related packages to latest versions
+- Updated all development dependencies to their latest stable versions
+
+### Security
+- Updated dependencies to resolve potential security issues
+- Ensured all packages are using LTS versions 

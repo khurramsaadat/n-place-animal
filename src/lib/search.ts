@@ -2,20 +2,26 @@ type WordCategory = 'name' | 'place' | 'animal' | 'thing';
 type Letter = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' |
              'N' | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X' | 'Y' | 'Z';
 
-interface WordDictionary {
-  [key: string]: {
-    [key in Letter]?: string[];
-  };
-}
+type WordDictionary = Record<WordCategory, Partial<Record<Letter, string[]>>>;
 
 // Moving the common words and search logic to client-side
 export const commonWords: WordDictionary = {
   name: {
     A: ['Adam', 'Alice', 'Alex', 'Anna', 'Andrew', 'Amy', 'Aaron', 'Abigail'],
-    B: ['Benjamin', 'Brian', 'Brandon', 'Barbara', 'Beth', 'Bruce', 'Bill', 'Bob'],
-    // ... (rest of the common words data)
+    B: ['Benjamin', 'Brian', 'Brandon', 'Barbara', 'Beth', 'Bruce', 'Bill', 'Bob']
   },
-  // ... (other categories)
+  place: {
+    A: ['Alabama', 'Alaska', 'Arizona', 'Arkansas', 'Atlanta'],
+    B: ['Boston', 'Baltimore', 'Berlin', 'Brussels', 'Bangkok']
+  },
+  animal: {
+    A: ['Ant', 'Antelope', 'Ape', 'Alligator', 'Alpaca'],
+    B: ['Bear', 'Beaver', 'Bee', 'Buffalo', 'Butterfly']
+  },
+  thing: {
+    A: ['Apple', 'Airplane', 'Arrow', 'Anchor', 'Axe'],
+    B: ['Ball', 'Book', 'Bottle', 'Box', 'Brush']
+  }
 };
 
 export async function searchWords(
