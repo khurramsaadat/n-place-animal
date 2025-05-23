@@ -1,8 +1,25 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Footer = () => {
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === '/') {
+      return pathname === path;
+    }
+    return pathname.startsWith(path);
+  };
+
+  const quickLinks = [
+    { href: '/how-to-play', label: 'How to Play' },
+    { href: '/leaderboard', label: 'Leaderboard' },
+    { href: '/training', label: 'Training' },
+    { href: '/feedback', label: 'Feedback' },
+  ];
+
   return (
     <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-8">
@@ -20,26 +37,20 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/how-to-play" className="text-gray-400 hover:text-white transition-colors">
-                  How to Play
-                </Link>
-              </li>
-              <li>
-                <Link href="/leaderboard" className="text-gray-400 hover:text-white transition-colors">
-                  Leaderboard
-                </Link>
-              </li>
-              <li>
-                <Link href="/training" className="text-gray-400 hover:text-white transition-colors">
-                  Training
-                </Link>
-              </li>
-              <li>
-                <Link href="/feedback" className="text-gray-400 hover:text-white transition-colors">
-                  Feedback
-                </Link>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`transition-colors ${
+                      isActive(link.href)
+                        ? 'text-purple-400 font-medium'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

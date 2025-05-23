@@ -1,100 +1,107 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { hintsDatabase } from '@/lib/hintsDatabase';
 
 interface HintPanelProps {
   letter: string;
 }
 
-interface CategoryHints {
-  [key: string]: string[];
-}
-
 const HintPanel = ({ letter }: HintPanelProps) => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [hints, setHints] = useState<CategoryHints>({
-    name: [],
-    place: [],
-    animal: [],
-    thing: [],
+  const [hints, setHints] = useState({
+    name: [] as string[],
+    place: [] as string[],
+    animal: [] as string[],
+    thing: [] as string[],
   });
 
+  // Keep track of previously shown hints
+  const previousHints = useRef<{
+    [key: string]: {
+      [category: string]: Set<string>;
+    };
+  }>({});
+
+  const getRandomHints = (array: string[], count: number, category: string): string[] => {
+    if (!array.length) return [];
+
+    // Initialize tracking for this letter if not exists
+    if (!previousHints.current[letter]) {
+      previousHints.current[letter] = {
+        name: new Set(),
+        place: new Set(),
+        animal: new Set(),
+        thing: new Set(),
+      };
+    }
+
+    const usedHints = previousHints.current[letter][category];
+    
+    // If we've used all hints, reset the tracking
+    if (usedHints.size >= array.length) {
+      usedHints.clear();
+    }
+
+    // Filter out previously shown hints
+    const availableHints = array.filter(hint => !usedHints.has(hint));
+    
+    // If we don't have enough available hints, clear some old ones
+    if (availableHints.length < count) {
+      usedHints.clear();
+    }
+
+    // Shuffle available hints
+    const shuffled = [...availableHints].sort(() => 0.5 - Math.random());
+    const selected = shuffled.slice(0, count);
+
+    // Track the newly selected hints
+    selected.forEach(hint => usedHints.add(hint));
+
+    return selected;
+  };
+
   useEffect(() => {
-    if (letter) {
-      setIsLoading(true);
-      Promise.all([
-        fetchHintsForCategory('name'),
-        fetchHintsForCategory('place'),
-        fetchHintsForCategory('animal'),
-        fetchHintsForCategory('thing')
-      ]).then(() => setIsLoading(false));
+    if (letter && hintsDatabase[letter]) {
+      // Get random hints for each category
+      const randomHints = {
+        name: getRandomHints(hintsDatabase[letter].name, 3, 'name'),
+        place: getRandomHints(hintsDatabase[letter].place, 3, 'place'),
+        animal: getRandomHints(hintsDatabase[letter].animal, 3, 'animal'),
+        thing: getRandomHints(hintsDatabase[letter].thing, 3, 'thing'),
+      };
+      setHints(randomHints);
+    } else {
+      setHints({
+        name: [],
+        place: [],
+        animal: [],
+        thing: [],
+      });
     }
   }, [letter]);
 
-  const fetchHintsForCategory = async (category: string) => {
-    let searchQuery = '';
-    switch (category) {
-      case 'name':
-        searchQuery = `popular ${letter} names first names given names`;
-        break;
-      case 'place':
-        searchQuery = `famous places cities countries starting with letter ${letter}`;
-        break;
-      case 'animal':
-        searchQuery = `animals species wildlife starting with letter ${letter}`;
-        break;
-      case 'thing':
-        searchQuery = `common objects items things starting with letter ${letter}`;
-        break;
-    }
-
-    try {
-      const results = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}&category=${category}&letter=${letter}`);
-      const data = await results.json();
-      
-      // Take only the first 3 hints
-      const limitedHints = (data.hints || []).slice(0, 3);
-      
-      setHints(prev => ({
-        ...prev,
-        [category]: limitedHints,
-      }));
-    } catch (error) {
-      console.error('Error fetching hints:', error);
-      setHints(prev => ({
-        ...prev,
-        [category]: [],
-      }));
-    }
-  };
-
-  const formatHints = (hints: string[]): string => {
-    if (hints.length === 0) return 'No hints available.';
-    return `${hints.join(', ')}.`;
+  const formatHints = (hintArray: string[]): string => {
+    if (hintArray.length === 0) return 'No hints available.';
+    return `${hintArray.join(', ')}.`;
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
-      <h2 className="text-2xl font-bold text-purple-600 mb-4">Hints</h2>
+    <div className="bg-white rounded-lg shadow-lg p-4">
+      <h2 className="text-xl font-semibold text-purple-600 mb-3">Hints</h2>
       
-      {isLoading ? (
-        <div className="flex flex-col items-center justify-center h-32 space-y-3">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-600"></div>
-          <p className="text-gray-500">Loading hints...</p>
-        </div>
-      ) : !letter ? (
-        <div className="text-center text-gray-500 py-8">
+      {!letter ? (
+        <div className="text-center text-sm text-gray-500 py-6">
           <p>Waiting for a letter...</p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-2">
           {Object.entries(hints).map(([category, categoryHints]) => (
-            <div key={category} className="bg-purple-50 p-4 rounded-lg">
+            <div key={category} className="bg-purple-50 p-3 rounded-lg">
               <div className="flex flex-wrap gap-2 items-baseline">
-                <span className="font-semibold text-purple-700 capitalize min-w-[4rem]">
+                <span className="text-sm font-medium text-purple-700 capitalize min-w-[4rem]">
                   {category}:
                 </span>
-                <span className="text-gray-700">
+                <span className="text-sm text-gray-700">
                   {formatHints(categoryHints)}
                 </span>
               </div>
@@ -104,9 +111,9 @@ const HintPanel = ({ letter }: HintPanelProps) => {
       )}
 
       {/* Tips Section */}
-      <div className="mt-6 pt-6 border-t border-gray-200">
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">Quick Tips</h3>
-        <ul className="text-sm text-gray-600 space-y-2">
+      <div className="mt-4 pt-4 border-t border-gray-200">
+        <h3 className="text-base font-medium text-gray-700 mb-2">Quick Tips</h3>
+        <ul className="text-xs text-gray-600 space-y-1.5">
           <li>• Think of common prefixes with this letter</li>
           <li>• Consider different languages and cultures</li>
           <li>• Try to make connections with familiar words</li>

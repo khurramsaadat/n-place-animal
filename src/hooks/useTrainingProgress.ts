@@ -13,6 +13,16 @@ interface TrainingStats {
   bestScore: number;
   recentLetters: string[];
   categoryStrengths: CategoryStrengths;
+  latestGame?: {
+    letter: string;
+    score: number;
+    answers: {
+      name: string;
+      place: string;
+      animal: string;
+      thing: string;
+    };
+  };
 }
 
 interface GameResult {
@@ -37,6 +47,7 @@ const INITIAL_STATS: TrainingStats = {
     animal: 0,
     thing: 0,
   },
+  latestGame: undefined
 };
 
 export function useTrainingProgress() {
@@ -85,6 +96,7 @@ export function useTrainingProgress() {
         bestScore: newBestScore,
         recentLetters: newRecentLetters,
         categoryStrengths: newStrengths,
+        latestGame: result
       };
 
       // Save to localStorage
