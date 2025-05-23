@@ -1,0 +1,177 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [0.1.0] - 2024-03-19
+
+### Project Initialization
+- Created Next.js 14 project with TypeScript and Tailwind CSS
+- Set up initial project structure
+- Added game-specific components structure
+
+### Directory Structure
+```
+name-place-animal/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── game/
+│   │   │   ├── GameBoard.tsx
+│   │   │   ├── LetterDisplay.tsx
+│   │   │   ├── Timer.tsx
+│   │   │   └── InputFields.tsx
+│   │   ├── ui/
+│   │   │   ├── Header.tsx
+│   │   │   └── Footer.tsx
+│   │   └── shared/
+│   ├── lib/
+│   │   ├── utils.ts
+│   │   └── constants.ts
+│   └── styles/
+├── public/
+│   └── assets/
+├── .env.local.example
+└── README.md
+```
+
+### Added
+- Project initialization with Next.js 14
+- TypeScript configuration
+- Tailwind CSS setup
+- Basic project structure
+- Game-specific component templates
+
+### Technical Details
+- Next.js version: 14.x
+- TypeScript version: 5.x
+- Tailwind CSS version: 3.x
+- Node.js version: 20.x
+
+### Commands Used
+```bash
+- npm run dev (Development server)
+```
+
+## [2024-01-09] - Enhancement: Hint System and Repository Setup
+
+### Added
+- Modified HintPanel component to show exactly 3 hints per category
+- Added period at the end of hint lists
+- Implemented comma-separated format for hints
+- Set up GitHub repository at https://github.com/khurramsaadat/name-place.git
+
+### Changed
+- Updated hint display format to: "Category: Hint1, Hint2, Hint3."
+- Improved hint loading and error handling
+- Enhanced fallback system for when hints are not available
+
+### Project Structure
+```
+name-place-animal/
+├── .cursor/
+│   └── rules/
+│       └── khurram-rules.mdc
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── search/
+│   │   │       └── route.ts
+│   │   ├── leaderboard/
+│   │   │   └── page.tsx
+│   │   ├── rules/
+│   │   │   └── page.tsx
+│   │   ├── training/
+│   │   │   └── page.tsx
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components/
+│   │   ├── game/
+│   │   │   ├── GameBoard.tsx
+│   │   │   ├── GameResults.tsx
+│   │   │   ├── InputFields.tsx
+│   │   │   ├── LetterDisplay.tsx
+│   │   │   └── Timer.tsx
+│   │   ├── training/
+│   │   │   ├── HintPanel.tsx
+│   │   │   └── ProgressTracker.tsx
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   └── Hero.tsx
+│   └── lib/
+│       ├── config.ts
+│       └── utils.ts
+├── public/
+├── CHANGELOG.md
+├── README.md
+├── instructions.md
+├── netlify.toml
+├── package.json
+└── package-lock.json
+```
+
+### Technical Details
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- DuckDuckGo API integration for hints
+- Mobile-first responsive design
+
+### Git Commands Used
+```bash
+git add .
+git commit -m "Initial commit: Basic UX for Name Place Animal Thing game"
+git branch -M main
+git push -u origin main
+```
+
+## [2024-02-20] - Tailwind CSS 4 Migration
+
+### Changed
+- Updated Tailwind CSS to version 4.0.0
+- Updated PostCSS configuration to use `@tailwindcss/postcss`
+- Simplified globals.css to use new Tailwind CSS 4 import syntax
+- Removed deprecated Tailwind directives and configurations
+- Converted @apply directives to standard CSS
+- Updated package dependencies to latest versions
+
+### Added
+- Added `@tailwindcss/postcss` package
+- Added proper CSS variable usage for theme colors
+
+### Removed
+- Removed deprecated Tailwind CSS v3 configuration
+- Removed unnecessary dependencies
+- Removed outdated PostCSS plugins
+
+### Directory Structure
+```
+n-place-animal/
+├── .next/
+├── public/
+│   └── music/
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── search/
+│   │   ├── leaderboard/
+│   │   ├── rules/
+│   │   └── training/
+│   ├── components/
+│   │   ├── game/
+│   │   ├── training/
+│   │   └── ui/
+│   ├── hooks/
+│   └── lib/
+├── postcss.config.js
+├── tailwind.config.js
+└── package.json
+```
+
+### Technical Details
+- Node.js environment: Windows 11
+- IDE: Cursor AI
+- Next.js version: 14.2.29
+- Tailwind CSS version: 4.0.0
+- React version: 18 
