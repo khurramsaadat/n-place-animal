@@ -1,42 +1,20 @@
 import React, { useState, useEffect, createContext, useContext, PropsWithChildren } from 'react';
+import { GameResult } from '@/lib/types';
 
-interface CategoryStrengths {
+export interface CategoryStrengths {
   name: number;
   place: number;
   animal: number;
   thing: number;
 }
 
-interface TrainingStats {
+export interface TrainingStats {
   gamesPlayed: number;
   averageScore: number;
   bestScore: number;
-  recentLetters: string[];
+  recentGames: GameResult[];
   categoryStrengths: CategoryStrengths;
-  latestGame?: {
-    letter: string;
-    score: number;
-    answers: {
-      name: string;
-      place: string;
-      animal: string;
-      thing: string;
-    };
-  };
-}
-
-interface GameResult {
-  letter: string;
-  score: number;
-  answers: {
-    name: string;
-    place: string;
-    animal: string;
-    thing: string;
-  };
-  timeUsed: number;
-  speedBonus: number;
-  baseScore: number;
+  latestGame?: GameResult;
 }
 
 interface ProgressContextType {
@@ -49,7 +27,7 @@ const INITIAL_STATS: TrainingStats = {
   gamesPlayed: 0,
   averageScore: 0,
   bestScore: 0,
-  recentLetters: [],
+  recentGames: [],
   categoryStrengths: {
     name: 0,
     place: 0,
@@ -83,23 +61,29 @@ export function useTrainingProgress(isTrainingMode: boolean = false) {
       const newAverageScore = newTotalScore / newGamesPlayed;
       const newBestScore = Math.max(prevStats.bestScore, result.score);
 
-      // Update recent letters (keep last 5)
-      const newRecentLetters = [result.letter, ...prevStats.recentLetters].slice(0, 5);
+      // Update recent games (keep last 5)
+      const newRecentGames = [result, ...(prevStats.recentGames || [])].slice(0, 5);
 
       // Update category strengths
-      const newStrengths = { ...prevStats.categoryStrengths };
+      const newStrengths = { ...(prevStats.categoryStrengths || {
+        name: 0,
+        place: 0,
+        animal: 0,
+        thing: 0,
+      })};
+      
       Object.entries(result.answers).forEach(([category, answer]) => {
         if (answer) {
           // Increase strength if answer was provided
           newStrengths[category as keyof CategoryStrengths] = Math.min(
             100,
-            newStrengths[category as keyof CategoryStrengths] + 5
+            (newStrengths[category as keyof CategoryStrengths] || 0) + 5
           );
         } else {
           // Decrease strength if no answer was provided
           newStrengths[category as keyof CategoryStrengths] = Math.max(
             0,
-            newStrengths[category as keyof CategoryStrengths] - 2
+            (newStrengths[category as keyof CategoryStrengths] || 0) - 2
           );
         }
       });
@@ -108,7 +92,7 @@ export function useTrainingProgress(isTrainingMode: boolean = false) {
         gamesPlayed: newGamesPlayed,
         averageScore: newAverageScore,
         bestScore: newBestScore,
-        recentLetters: newRecentLetters,
+        recentGames: newRecentGames,
         categoryStrengths: newStrengths,
         latestGame: result
       };
@@ -150,12 +134,12 @@ export function useTrainingProgressContext() {
 }
 
 // Provider components
-export function GameProgressProvider({ children }: PropsWithChildren<{}>) {
+export function GameProgressProvider({ children }: { children: React.ReactNode }) {
   const progress = useTrainingProgress(false);
   return React.createElement(GameProgressContext.Provider, { value: progress }, children);
 }
 
-export function TrainingProgressProvider({ children }: PropsWithChildren<{}>) {
+export function TrainingProgressProvider({ children }: { children: React.ReactNode }) {
   const progress = useTrainingProgress(true);
   return React.createElement(TrainingProgressContext.Provider, { value: progress }, children);
 } 

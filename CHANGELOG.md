@@ -363,3 +363,101 @@ n-place-animal
   tailwind.config.js
   tsconfig.json
 ```
+
+## [2024-05-26]
+
+### Fixed
+- Webpack cache issue causing build failures
+- Cleaned up webpack cache to resolve file rename errors
+- Updated Netlify and Next.js configurations for proper static deployment
+  - Changed Next.js output directory to 'out'
+  - Updated Netlify publish directory to match Next.js output
+  - Ensured proper static export settings
+
+### Project Structure
+```
+n-place-animal
+  .next/
+    cache/
+      swc/
+        plugins/
+          v7_windows_x86_64_0.106.15/
+      webpack/
+        client-development/
+        server-development/
+    server/
+      app/
+        _not-found/
+        favicon.ico/
+        leaderboard/
+        rules/
+        training/
+        word-bank/
+      pages/
+      vendor-chunks/
+    static/
+      chunks/
+        app/
+          _not-found/
+          leaderboard/
+          rules/
+          training/
+          word-bank/
+        pages/
+      css/
+        app/
+      development/
+      media/
+      webpack/
+        app/
+          leaderboard/
+          training/
+          word-bank/
+    types/
+      app/
+        leaderboard/
+        rules/
+        training/
+        word-bank/
+  public/
+    music/
+    sounds/
+  src/
+    app/
+      api/
+        search/
+      leaderboard/
+      rules/
+      training/
+      word-bank/
+    components/
+      game/
+      training/
+      ui/
+    hooks/
+    lib/
+  types/
+  .eslintrc.json
+  .gitignore
+  CHANGELOG.md
+  eslint.config.mjs
+  instructions.md
+  netlify.toml
+  next-env.d.ts
+  next.config.mjs
+  next.config.ts
+  package-lock.json
+  package.json
+  postcss.config.js
+  postcss.config.mjs
+  README.md
+  tailwind.config.js
+  tsconfig.json
+```
+
+### Commands Used
+```bash
+# Clean webpack cache and restart dev server
+Remove-Item -Recurse -Force .next/cache/webpack
+npm run dev
+```

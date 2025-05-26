@@ -19,8 +19,24 @@ const ProgressTracker = ({ onClose, isTrainingMode = false }: ProgressTrackerPro
     progress = gameProgress;
   }
   
-  const { stats, resetProgress } = progress;
+  const { stats = {
+    gamesPlayed: 0,
+    averageScore: 0,
+    bestScore: 0,
+    recentGames: [],
+    categoryStrengths: {
+      name: 0,
+      place: 0,
+      animal: 0,
+      thing: 0,
+    },
+    latestGame: undefined
+  }, resetProgress } = progress;
   const [showResetConfirm, setShowResetConfirm] = useState(false);
+
+  // Ensure recentGames is always an array
+  const recentGames = stats?.recentGames || [];
+  const latestGame = stats?.latestGame;
 
   const handleReset = () => {
     resetProgress();
@@ -107,34 +123,28 @@ const ProgressTracker = ({ onClose, isTrainingMode = false }: ProgressTrackerPro
                 <th className="pb-2 text-sm font-medium">Place</th>
                 <th className="pb-2 text-sm font-medium">Animal</th>
                 <th className="pb-2 text-sm font-medium">Thing</th>
-                <th className="pb-2 text-sm font-medium text-right">Time</th>
-                <th className="pb-2 text-sm font-medium text-right">Speed</th>
                 <th className="pb-2 text-sm font-medium text-right">Total</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-100">
-              {stats.latestGame && (
+              {latestGame && (
                 <tr className="text-gray-600 bg-white animate-fadeHighlight">
-                  <td className="py-2 font-medium text-purple-600">{stats.latestGame.letter}</td>
-                  <td className="py-2">{stats.latestGame.answers.name || '-'}</td>
-                  <td className="py-2">{stats.latestGame.answers.place || '-'}</td>
-                  <td className="py-2">{stats.latestGame.answers.animal || '-'}</td>
-                  <td className="py-2">{stats.latestGame.answers.thing || '-'}</td>
-                  <td className="py-2 text-right">9s</td>
-                  <td className="py-2 text-right text-green-600">+82</td>
-                  <td className="py-2 text-right font-medium text-purple-600">82</td>
+                  <td className="py-2 font-medium text-purple-600">{latestGame.letter}</td>
+                  <td className="py-2">{latestGame.answers.name || '-'}</td>
+                  <td className="py-2">{latestGame.answers.place || '-'}</td>
+                  <td className="py-2">{latestGame.answers.animal || '-'}</td>
+                  <td className="py-2">{latestGame.answers.thing || '-'}</td>
+                  <td className="py-2 text-right font-medium text-purple-600">{latestGame.score}</td>
                 </tr>
               )}
-              {stats.recentLetters.slice(stats.latestGame ? 1 : 0).map((letter, index) => (
+              {recentGames.slice(latestGame ? 1 : 0).map((game, index) => (
                 <tr key={index} className="text-gray-500 bg-white">
-                  <td className="py-2 font-medium">{letter}</td>
-                  <td className="py-2">-</td>
-                  <td className="py-2">-</td>
-                  <td className="py-2">-</td>
-                  <td className="py-2">-</td>
-                  <td className="py-2 text-right">-</td>
-                  <td className="py-2 text-right">-</td>
-                  <td className="py-2 text-right">-</td>
+                  <td className="py-2 font-medium">{game.letter}</td>
+                  <td className="py-2">{game.answers.name || '-'}</td>
+                  <td className="py-2">{game.answers.place || '-'}</td>
+                  <td className="py-2">{game.answers.animal || '-'}</td>
+                  <td className="py-2">{game.answers.thing || '-'}</td>
+                  <td className="py-2 text-right">{game.score}</td>
                 </tr>
               ))}
             </tbody>
@@ -143,47 +153,39 @@ const ProgressTracker = ({ onClose, isTrainingMode = false }: ProgressTrackerPro
 
         {/* Mobile View */}
         <div className="md:hidden space-y-2">
-          {stats.latestGame && (
+          {latestGame && (
             <div className="bg-white rounded p-2 animate-fadeHighlight">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-medium text-purple-600">{stats.latestGame.letter}</span>
-                <span className="text-sm font-medium text-purple-600">Total: {stats.latestGame.score}</span>
+                <span className="font-medium text-purple-600">{latestGame.letter}</span>
+                <span className="text-sm font-medium text-purple-600">Total: {latestGame.score}</span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-sm">
                 <div>
-                  <span className="text-gray-500">Name:</span> {stats.latestGame.answers.name || '-'}
+                  <span className="text-gray-500">Name:</span> {latestGame.answers.name || '-'}
                 </div>
                 <div>
-                  <span className="text-gray-500">Place:</span> {stats.latestGame.answers.place || '-'}
+                  <span className="text-gray-500">Place:</span> {latestGame.answers.place || '-'}
                 </div>
                 <div>
-                  <span className="text-gray-500">Animal:</span> {stats.latestGame.answers.animal || '-'}
+                  <span className="text-gray-500">Animal:</span> {latestGame.answers.animal || '-'}
                 </div>
                 <div>
-                  <span className="text-gray-500">Thing:</span> {stats.latestGame.answers.thing || '-'}
-                </div>
-                <div>
-                  <span className="text-gray-500">Time:</span> 9s
-                </div>
-                <div>
-                  <span className="text-gray-500">Speed:</span> <span className="text-green-600">+82</span>
+                  <span className="text-gray-500">Thing:</span> {latestGame.answers.thing || '-'}
                 </div>
               </div>
             </div>
           )}
-          {stats.recentLetters.slice(stats.latestGame ? 1 : 0).map((letter, index) => (
+          {recentGames.slice(latestGame ? 1 : 0).map((game, index) => (
             <div key={index} className="bg-white rounded p-2">
               <div className="flex justify-between items-center mb-2">
-                <span className="font-medium">{letter}</span>
-                <span className="text-sm text-gray-500">-</span>
+                <span className="font-medium">{game.letter}</span>
+                <span className="text-sm text-gray-500">Total: {game.score}</span>
               </div>
               <div className="grid grid-cols-2 gap-2 text-sm text-gray-500">
-                <div>Name: -</div>
-                <div>Place: -</div>
-                <div>Animal: -</div>
-                <div>Thing: -</div>
-                <div>Time: -</div>
-                <div>Speed: -</div>
+                <div>Name: {game.answers.name || '-'}</div>
+                <div>Place: {game.answers.place || '-'}</div>
+                <div>Animal: {game.answers.animal || '-'}</div>
+                <div>Thing: {game.answers.thing || '-'}</div>
               </div>
             </div>
           ))}

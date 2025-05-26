@@ -4,7 +4,11 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
-const Header = () => {
+interface HeaderProps {
+  onLogoClick: () => void;
+}
+
+const Header = ({ onLogoClick }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const pathname = usePathname();
 
@@ -77,19 +81,17 @@ const Header = () => {
     <header className="bg-white shadow-md relative z-50">
       <nav className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg p-2 shadow-lg transform group-hover:scale-105 transition-all duration-200">
-              <span className="text-2xl font-black text-white">NPAT</span>
+          <button 
+            onClick={onLogoClick}
+            className="flex items-center space-x-3 hover:opacity-80 transition-opacity focus:outline-none"
+          >
+            <div className="bg-purple-600 text-white font-bold text-xl p-3 rounded-lg">
+              NPAT
             </div>
-            <div className="flex flex-col">
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-transparent bg-clip-text group-hover:from-purple-500 group-hover:to-indigo-500 transition-all duration-200">
-                Name Place
-              </span>
-              <span className="text-xl font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-transparent bg-clip-text group-hover:from-purple-500 group-hover:to-indigo-500 transition-all duration-200">
-                Animal Thing
-              </span>
+            <div className="text-xl font-semibold text-purple-600">
+              Name Place<br />Animal Thing
             </div>
-          </Link>
+          </button>
 
           {/* Mobile menu button */}
           <button

@@ -4,15 +4,29 @@ import { useState, useRef, useEffect } from 'react';
 
 const BackgroundMusic = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
     // Initialize audio element with preload
     if (!audioRef.current) {
-      audioRef.current = new Audio('/music/background-music.mp3');
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0.15; // Set a comfortable default volume
-      audioRef.current.preload = 'auto'; // Enable preloading
+      const audio = new Audio('/music/background-music.mp3');
+      audio.loop = true;
+      audio.volume = 0.15; // Set a comfortable default volume
+      audio.preload = 'auto'; // Enable preloading
+
+      // Add error handling
+      audio.onerror = (e) => {
+        console.warn('Audio loading error:', e);
+        setIsLoaded(false);
+      };
+
+      // Add load success handling
+      audio.oncanplaythrough = () => {
+        setIsLoaded(true);
+      };
+
+      audioRef.current = audio;
     }
 
     // Cleanup on unmount
@@ -25,17 +39,20 @@ const BackgroundMusic = () => {
   }, []);
 
   const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play().catch(error => {
-          console.error('Error playing audio:', error);
-        });
-      }
-      setIsPlaying(!isPlaying);
+    if (!audioRef.current || !isLoaded) return;
+
+    if (isPlaying) {
+      audioRef.current.pause();
+    } else {
+      audioRef.current.play().catch(error => {
+        console.error('Error playing audio:', error);
+        setIsPlaying(false);
+      });
     }
+    setIsPlaying(!isPlaying);
   };
+
+  if (!isLoaded) return null;
 
   return (
     <div className="fixed bottom-4 right-4 z-50">

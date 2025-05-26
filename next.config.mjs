@@ -5,7 +5,7 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  distDir: '.next',
+  distDir: 'out',
   cleanDistDir: true,
   poweredByHeader: false,
 };
