@@ -2,16 +2,7 @@
 
 import { useState } from 'react';
 
-// This will be replaced with actual data from Supabase later
-const DUMMY_SCORES = [
-  { id: 1, player: 'Player 1', score: 35, date: '2024-03-19' },
-  { id: 2, player: 'Player 2', score: 30, date: '2024-03-19' },
-  { id: 3, player: 'Player 3', score: 25, date: '2024-03-19' },
-];
-
 export default function LeaderboardPage() {
-  const [timeFrame, setTimeFrame] = useState<'all' | 'today' | 'week' | 'month'>('all');
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-purple-50 py-12">
       <div className="max-w-4xl mx-auto px-4">
@@ -19,67 +10,42 @@ export default function LeaderboardPage() {
           Leaderboard
         </h1>
 
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          {/* Time Frame Selector */}
-          <div className="flex border-b border-gray-200">
-            {['all', 'today', 'week', 'month'].map((period) => (
-              <button
-                key={period}
-                onClick={() => setTimeFrame(period as typeof timeFrame)}
-                className={`flex-1 px-4 py-3 text-sm font-medium ${
-                  timeFrame === period
-                    ? 'bg-purple-50 text-purple-600 border-b-2 border-purple-600'
-                    : 'text-gray-500 hover:text-purple-600 hover:bg-purple-50'
-                }`}
-              >
-                {period.charAt(0).toUpperCase() + period.slice(1)}
-              </button>
-            ))}
+        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="mb-6">
+            <div className="inline-block p-3 bg-purple-100 rounded-full mb-4">
+              <svg className="w-12 h-12 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">Coming Soon!</h2>
+            <p className="text-gray-600 max-w-lg mx-auto">
+              We're working hard to bring you an exciting leaderboard feature where you can compete with players worldwide! 
+              Track your progress, climb the ranks, and showcase your word-guessing skills.
+            </p>
           </div>
 
-          {/* Leaderboard Table */}
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-gray-50">
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Rank
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Player
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Score
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {DUMMY_SCORES.map((score, index) => (
-                  <tr
-                    key={score.id}
-                    className="hover:bg-purple-50 transition-colors"
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm font-medium text-gray-900">
-                        {index + 1}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{score.player}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-900">{score.score}</div>
-                    </td>
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">{score.date}</div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="space-y-4">
+            <div className="bg-purple-50 rounded-lg p-4">
+              <h3 className="font-semibold text-purple-600 mb-2">🏆 Global Rankings</h3>
+              <p className="text-gray-600">Compete with players from around the world</p>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4">
+              <h3 className="font-semibold text-purple-600 mb-2">📊 Daily & Weekly Challenges</h3>
+              <p className="text-gray-600">New competitions every day and week</p>
+            </div>
+            <div className="bg-purple-50 rounded-lg p-4">
+              <h3 className="font-semibold text-purple-600 mb-2">🌟 Achievement System</h3>
+              <p className="text-gray-600">Earn badges and unlock special rewards</p>
+            </div>
+          </div>
+
+          <div className="mt-8">
+            <button
+              onClick={() => window.history.back()}
+              className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 py-3 rounded-full font-semibold hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              Back to Game
+            </button>
           </div>
         </div>
       </div>

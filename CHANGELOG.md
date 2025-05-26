@@ -309,3 +309,57 @@ n-place-animal/
 - Changed publish directory to 'out'
 - Added NETLIFY_NEXT_PLUGIN_SKIP environment variable
 - Simplified build process for static deployment
+
+## [2025-05-26] - Game UI Improvements
+
+### Changed
+- Removed auto-scroll behavior from both desktop and mobile views
+- Updated GameBoard component to show both "Done" and "Play Again" buttons during active game
+- Made Progress Tracker more compact with reduced padding/margins
+- Removed Category Strengths section from Progress Tracker
+- Updated Recent Games table with new columns (Time Used, Speed Bonus)
+- Added mobile-friendly card view for Recent Games
+- Added fade highlight animation for new game entries
+
+### Added
+- New fade highlight animation in Tailwind config
+- Added timeUsed, speedBonus, and baseScore to GameResult interface
+
+### Directory Structure
+```
+n-place-animal
+  .next/
+  public/
+    music/
+    sounds/
+  src/
+    app/
+      api/
+      leaderboard/
+      rules/
+      training/
+      word-bank/
+    components/
+      game/
+      training/
+      ui/
+    hooks/
+    lib/
+  types/
+  .eslintrc.json
+  .gitignore
+  CHANGELOG.md
+  eslint.config.mjs
+  instructions.md
+  netlify.toml
+  next-env.d.ts
+  next.config.mjs
+  next.config.ts
+  package-lock.json
+  package.json
+  postcss.config.js
+  postcss.config.mjs
+  README.md
+  tailwind.config.js
+  tsconfig.json
+```

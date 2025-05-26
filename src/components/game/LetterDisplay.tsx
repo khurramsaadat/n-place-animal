@@ -5,18 +5,27 @@ import { useEffect } from 'react';
 interface LetterDisplayProps {
   letter: string;
   isGameActive?: boolean;
+  onAnnouncementComplete?: () => void;
 }
 
-const LetterDisplay = ({ letter, isGameActive = false }: LetterDisplayProps) => {
+const LetterDisplay = ({ letter, isGameActive = false, onAnnouncementComplete }: LetterDisplayProps) => {
   useEffect(() => {
     if (letter && isGameActive) {
       const utterance = new SpeechSynthesisUtterance(
         `Let's play Name Place Animal Thing. Letter ${letter}`
       );
       utterance.lang = 'en-US';
+      
+      // Add event listener for when speech is complete
+      utterance.onend = () => {
+        if (onAnnouncementComplete) {
+          onAnnouncementComplete();
+        }
+      };
+      
       speechSynthesis.speak(utterance);
     }
-  }, [letter, isGameActive]);
+  }, [letter, isGameActive, onAnnouncementComplete]);
 
   return (
     <div className="flex items-center justify-center">

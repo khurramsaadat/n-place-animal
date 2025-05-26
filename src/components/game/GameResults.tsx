@@ -18,6 +18,7 @@ interface GameResultsProps {
   onPlayAgain: () => void;
   completionTime?: number; // Time remaining when done
   totalTime?: number; // Total time allowed
+  isTrainingMode?: boolean; // Add this prop
 }
 
 const GameResults = ({ 
@@ -32,7 +33,8 @@ const GameResults = ({
   score, 
   onPlayAgain,
   completionTime = 0,
-  totalTime = 45
+  totalTime = 45,
+  isTrainingMode = false // Add default value
 }: GameResultsProps) => {
   const timeUsed = totalTime - completionTime;
   const speedBonus = completionTime > 0 ? Math.floor(completionTime * 2) : 0;
@@ -162,15 +164,18 @@ const GameResults = ({
           </svg>
           <span>Play Again</span>
         </button>
-        <button
-          onClick={() => window.location.href = '/leaderboard'}
-          className="border-2 border-purple-500 text-purple-500 px-8 py-3 rounded-full font-bold hover:bg-purple-50 transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
-        >
-          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-          </svg>
-          <span>Leaderboard</span>
-        </button>
+        {/* Only show leaderboard button in regular mode */}
+        {!isTrainingMode && (
+          <button
+            onClick={() => window.location.href = '/leaderboard'}
+            className="border-2 border-purple-500 text-purple-500 px-8 py-3 rounded-full font-bold hover:bg-purple-50 transform hover:scale-105 transition-all duration-200 flex items-center justify-center space-x-2"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            <span>Leaderboard</span>
+          </button>
+        )}
       </div>
     </div>
   );

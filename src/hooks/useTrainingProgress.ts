@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext, PropsWithChildren } from 'react';
 
 interface CategoryStrengths {
   name: number;
@@ -34,6 +34,15 @@ interface GameResult {
     animal: string;
     thing: string;
   };
+  timeUsed: number;
+  speedBonus: number;
+  baseScore: number;
+}
+
+interface ProgressContextType {
+  stats: TrainingStats;
+  updateProgress: (result: GameResult) => void;
+  resetProgress: () => void;
 }
 
 const INITIAL_STATS: TrainingStats = {
@@ -50,16 +59,21 @@ const INITIAL_STATS: TrainingStats = {
   latestGame: undefined
 };
 
-export function useTrainingProgress() {
+// Create contexts for both training and game progress
+export const GameProgressContext = createContext<ProgressContextType | undefined>(undefined);
+export const TrainingProgressContext = createContext<ProgressContextType | undefined>(undefined);
+
+export function useTrainingProgress(isTrainingMode: boolean = false) {
   const [stats, setStats] = useState<TrainingStats>(INITIAL_STATS);
+  const storageKey = isTrainingMode ? 'trainingProgress' : 'gameProgress';
 
   useEffect(() => {
     // Load stats from localStorage on mount
-    const savedStats = localStorage.getItem('trainingProgress');
+    const savedStats = localStorage.getItem(storageKey);
     if (savedStats) {
       setStats(JSON.parse(savedStats));
     }
-  }, []);
+  }, [storageKey]);
 
   const updateProgress = (result: GameResult) => {
     setStats((prevStats) => {
@@ -100,7 +114,7 @@ export function useTrainingProgress() {
       };
 
       // Save to localStorage
-      localStorage.setItem('trainingProgress', JSON.stringify(newStats));
+      localStorage.setItem(storageKey, JSON.stringify(newStats));
 
       return newStats;
     });
@@ -108,7 +122,7 @@ export function useTrainingProgress() {
 
   const resetProgress = () => {
     setStats(INITIAL_STATS);
-    localStorage.removeItem('trainingProgress');
+    localStorage.removeItem(storageKey);
   };
 
   return {
@@ -116,4 +130,32 @@ export function useTrainingProgress() {
     updateProgress,
     resetProgress,
   };
+}
+
+// Custom hooks to use the contexts
+export function useGameProgress() {
+  const context = useContext(GameProgressContext);
+  if (context === undefined) {
+    throw new Error('useGameProgress must be used within a GameProgressProvider');
+  }
+  return context;
+}
+
+export function useTrainingProgressContext() {
+  const context = useContext(TrainingProgressContext);
+  if (context === undefined) {
+    throw new Error('useTrainingProgressContext must be used within a TrainingProgressProvider');
+  }
+  return context;
+}
+
+// Provider components
+export function GameProgressProvider({ children }: PropsWithChildren<{}>) {
+  const progress = useTrainingProgress(false);
+  return React.createElement(GameProgressContext.Provider, { value: progress }, children);
+}
+
+export function TrainingProgressProvider({ children }: PropsWithChildren<{}>) {
+  const progress = useTrainingProgress(true);
+  return React.createElement(TrainingProgressContext.Provider, { value: progress }, children);
 } 

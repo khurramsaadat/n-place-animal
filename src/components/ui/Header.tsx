@@ -20,11 +20,11 @@ const Header = () => {
   const navLinks = [
     { 
       href: '/', 
-      label: 'Play',
+      label: 'Game',
       icon: (
         <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.5 4C5.91 4 3 6.91 3 10.5c0 2.49 1.04 3.13 1.97 4.25C6 15.93 6 16.84 6 18.15V19c0 .55.45 1 1 1h2.17c.55 0 1-.45 1-1v-1.5c0-1.31 0-2.22 1.03-3.4.93-1.12 1.97-1.76 1.97-4.25C13.17 6.91 10.26 4 6.67 4" />
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 8c3.31 0 6 2.69 6 6 0 2.72-1.83 5.02-4.31 5.75C16.46 19.82 16.25 20 16 20h-2c-.55 0-1-.45-1-1v-1c0-.55.45-1 1-1h2l.12-.06C17.87 16.54 19 15.36 19 14c0-2.21-1.79-4-4-4" />
         </svg>
       )
     },
@@ -55,6 +55,15 @@ const Header = () => {
         </svg>
       )
     },
+    { 
+      href: '/word-bank', 
+      label: 'Word Bank',
+      icon: (
+        <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+      )
+    }
   ];
 
   const isActive = (path: string) => {

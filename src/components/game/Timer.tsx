@@ -7,11 +7,12 @@ interface TimerProps {
   setTimeRemaining: (time: number) => void;
   onTimeUp: () => void;
   isTrainingMode?: boolean;
+  isPaused?: boolean;
 }
 
-const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = false }: TimerProps) => {
+const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = false, isPaused = false }: TimerProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const totalTime = isTrainingMode ? 60 : 45;
+  const totalTime = isTrainingMode ? 60 : 50;
   const percentage = (timeRemaining / totalTime) * 100;
   const circumference = 2 * Math.PI * 36; // Circle radius is 36
   const strokeDashoffset = ((100 - percentage) / 100) * circumference; // Reversed for clockwise
@@ -20,8 +21,7 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
     // Create audio element only once
     if (!audioRef.current) {
       audioRef.current = new Audio('/sounds/clock-tick.mp3');
-      // Lower volume for training mode since it runs longer
-      audioRef.current.volume = isTrainingMode ? 0.1 : 0.2;
+      audioRef.current.volume = 0.2; // Set a consistent volume for the last 10 seconds
     }
 
     if (timeRemaining <= 0) {
@@ -33,21 +33,21 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
       return;
     }
 
-    // Play tick sound every second
-    const tickSound = audioRef.current.cloneNode() as HTMLAudioElement;
-    // Adjust volume based on remaining time
-    if (timeRemaining <= 10) {
-      tickSound.volume = 0.2; // Slightly louder in last 10 seconds
-    } else {
-      tickSound.volume = isTrainingMode ? 0.1 : 0.15;
+    // Don't start countdown or play sounds if paused
+    if (isPaused) {
+      return;
     }
-    
-    tickSound.play().catch(err => console.log('Audio play failed:', err));
-    
-    // Clean up the cloned audio element after it plays
-    tickSound.addEventListener('ended', () => {
-      tickSound.remove();
-    });
+
+    // Only play tick sound in last 10 seconds
+    if (timeRemaining <= 10) {
+      const tickSound = audioRef.current.cloneNode() as HTMLAudioElement;
+      tickSound.play().catch(err => console.log('Audio play failed:', err));
+      
+      // Clean up the cloned audio element after it plays
+      tickSound.addEventListener('ended', () => {
+        tickSound.remove();
+      });
+    }
 
     const timer = setInterval(() => {
       setTimeRemaining(timeRemaining - 1);
@@ -55,10 +55,12 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
 
     return () => {
       clearInterval(timer);
-      tickSound.pause();
-      tickSound.remove();
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
     };
-  }, [timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode]);
+  }, [timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode, isPaused]);
 
   const getColor = () => {
     if (isTrainingMode) {
