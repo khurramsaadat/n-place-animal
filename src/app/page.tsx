@@ -1,13 +1,13 @@
 'use client';
 
-import { useRef, Suspense } from 'react';
+import { useRef, Suspense, forwardRef } from 'react';
 import dynamic from 'next/dynamic';
 import ProgressTracker from '@/components/training/ProgressTracker';
-import type { GameBoardRef } from '@/components/game/GameBoard';
+import type { GameBoardRef, GameBoardProps } from '@/components/game/GameBoard';
 
-// Dynamically import GameBoard with no SSR and preserve ref
+// Move dynamic import outside to prevent recreation on each render
 const GameBoard = dynamic(
-  () => import('@/components/game/GameBoard'),
+  () => import('@/components/game/GameBoard').then(mod => mod.default),
   { 
     ssr: false,
     loading: () => (
@@ -17,6 +17,13 @@ const GameBoard = dynamic(
     )
   }
 );
+
+// Create a wrapper component that handles the ref forwarding
+const DynamicGameBoard = forwardRef<GameBoardRef, GameBoardProps>((props, ref) => {
+  return <GameBoard {...props} ref={ref} />;
+});
+
+DynamicGameBoard.displayName = 'DynamicGameBoard';
 
 export default function Home() {
   const gameBoardRef = useRef<GameBoardRef>(null);
@@ -30,7 +37,7 @@ export default function Home() {
               <div className="animate-pulse text-purple-600">Loading game...</div>
             </div>
           }>
-            <GameBoard 
+            <DynamicGameBoard 
               ref={gameBoardRef}
               isTrainingMode={false} 
             />

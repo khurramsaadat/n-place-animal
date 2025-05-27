@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface TimerProps {
   timeRemaining: number;
@@ -12,6 +12,8 @@ interface TimerProps {
 
 const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = false, isPaused = false }: TimerProps) => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [audioError, setAudioError] = useState<boolean>(false);
+  const hasEndedRef = useRef(false);
   const totalTime = isTrainingMode ? 60 : 50;
   const percentage = (timeRemaining / totalTime) * 100;
   const circumference = 2 * Math.PI * 36; // Circle radius is 36
@@ -24,7 +26,13 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
       audioRef.current.volume = 0.2; // Set a consistent volume for the last 10 seconds
     }
 
-    if (timeRemaining <= 0) {
+    // Reset hasEnded when time is reset
+    if (timeRemaining === totalTime) {
+      hasEndedRef.current = false;
+    }
+
+    if (timeRemaining <= 0 && !hasEndedRef.current) {
+      hasEndedRef.current = true;
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current.currentTime = 0;
@@ -33,15 +41,17 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
       return;
     }
 
-    // Don't start countdown or play sounds if paused
-    if (isPaused) {
+    // Don't start countdown or play sounds if paused or already ended
+    if (isPaused || hasEndedRef.current) {
       return;
     }
 
     // Only play tick sound in last 10 seconds
-    if (timeRemaining <= 10) {
+    if (timeRemaining <= 10 && !audioError) {
       const tickSound = audioRef.current.cloneNode() as HTMLAudioElement;
-      tickSound.play().catch(err => console.log('Audio play failed:', err));
+      tickSound.play().catch(() => {
+        setAudioError(true);
+      });
       
       // Clean up the cloned audio element after it plays
       tickSound.addEventListener('ended', () => {
@@ -50,7 +60,9 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
     }
 
     const timer = setInterval(() => {
-      setTimeRemaining(timeRemaining - 1);
+      if (!isPaused && !hasEndedRef.current) {
+        setTimeRemaining(timeRemaining - 1);
+      }
     }, 1000);
 
     return () => {
@@ -60,7 +72,7 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
         audioRef.current = null;
       }
     };
-  }, [timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode, isPaused]);
+  }, [timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode, isPaused, audioError, totalTime]);
 
   const getColor = () => {
     if (isTrainingMode) {
@@ -118,6 +130,11 @@ const Timer = ({ timeRemaining, setTimeRemaining, onTimeUp, isTrainingMode = fal
       </div>
       {isTrainingMode && (
         <span className="text-xs text-gray-500">Training Mode</span>
+      )}
+      {audioError && (
+        <div className="absolute top-0 right-0 text-xs text-gray-500">
+          🔇
+        </div>
       )}
     </div>
   );
