@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { hintsDatabase } from '@/lib/hintsDatabase';
 import CategoryIcon from '@/components/ui/CategoryIcon';
 
@@ -23,7 +23,7 @@ const HintPanel = ({ letter }: HintPanelProps) => {
     };
   }>({});
 
-  const getRandomHints = (array: string[], count: number, category: string): string[] => {
+  const getRandomHints = useCallback((array: string[], count: number, category: string): string[] => {
     if (!array.length) return [];
 
     // Initialize tracking for this letter if not exists
@@ -59,7 +59,7 @@ const HintPanel = ({ letter }: HintPanelProps) => {
     selected.forEach(hint => usedHints.add(hint));
 
     return selected;
-  };
+  }, [letter]);
 
   useEffect(() => {
     if (letter && hintsDatabase[letter]) {
@@ -79,7 +79,7 @@ const HintPanel = ({ letter }: HintPanelProps) => {
         thing: [],
       });
     }
-  }, [letter]);
+  }, [letter, getRandomHints]);
 
   const formatHints = (hintArray: string[]): string => {
     if (hintArray.length === 0) return 'No hints available.';

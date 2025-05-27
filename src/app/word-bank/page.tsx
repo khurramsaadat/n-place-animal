@@ -3,8 +3,10 @@
 import { useState } from 'react';
 import { hintsDatabase } from '@/lib/hintsDatabase';
 
+type Category = 'all' | 'name' | 'place' | 'animal' | 'thing';
+
 export default function WordBankPage() {
-  const [selectedCategory, setSelectedCategory] = useState<'all' | 'name' | 'place' | 'animal' | 'thing'>('all');
+  const [selectedCategory, setSelectedCategory] = useState<Category>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedLetter, setSelectedLetter] = useState<string>('');
 
@@ -36,7 +38,7 @@ export default function WordBankPage() {
 
   const filteredWords = selectedLetter
     ? getWordsForLetter(selectedLetter)
-    : Object.entries(hintsDatabase).reduce((acc, [letter, categories]) => {
+    : Object.entries(hintsDatabase).reduce((acc, [, categories]) => {
         Object.entries(categories).forEach(([category, words]) => {
           if (selectedCategory === 'all' || selectedCategory === category) {
             if (!acc[category]) acc[category] = [];
@@ -68,7 +70,7 @@ export default function WordBankPage() {
               </label>
               <select
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value as any)}
+                onChange={(e) => setSelectedCategory(e.target.value as Category)}
                 className="w-full rounded-lg border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 shadow-sm focus:border-purple-500 focus:ring-purple-500"
               >
                 <option value="all">All Categories</option>

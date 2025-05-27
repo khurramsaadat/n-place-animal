@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext, useContext, PropsWithChildren } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import { GameResult } from '@/lib/types';
 
 export interface CategoryStrengths {

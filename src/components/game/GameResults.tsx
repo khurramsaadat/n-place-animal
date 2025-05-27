@@ -12,8 +12,6 @@ interface GameResultsProps {
   letter: string;
   score: number;
   onPlayAgain: () => void;
-  timeUsed?: number;
-  isTrainingMode?: boolean;
 }
 
 const GameResults = ({ 
@@ -21,8 +19,6 @@ const GameResults = ({
   letter, 
   score,
   onPlayAgain,
-  timeUsed = 0,
-  isTrainingMode = false
 }: GameResultsProps) => {
   // Function to capitalize first letter
   const capitalizeFirstLetter = (text: string): string => {

@@ -6,7 +6,6 @@ import Header from '@/components/ui/Header';
 import Footer from '@/components/ui/Footer';
 import BackgroundMusic from '@/components/ui/BackgroundMusic';
 import DarkModeToggle from '@/components/ui/DarkModeToggle';
-import { useRef } from 'react';
 import { GameProgressProvider, TrainingProgressProvider } from '@/hooks/useTrainingProgress';
 
 const inter = Inter({ subsets: ['latin'] });

@@ -519,3 +519,17 @@ n-place-animal
   tailwind.config.js
   tsconfig.json
 ```
+
+### Fixed
+- Fixed conditional Hook usage in GameBoard.tsx by properly using useTrainingProgressContext at the top level
+- Removed unused imports:
+  - Removed useRef from layout.tsx
+  - Removed useState from leaderboard/page.tsx
+  - Removed PropsWithChildren from useTrainingProgress.ts
+- Fixed unused variables:
+  - Removed unused timeUsed and isTrainingMode props from GameResults.tsx
+  - Fixed unused letter variable in word-bank/page.tsx by using the spread operator
+- Added proper TypeScript types:
+  - Added Category type in word-bank/page.tsx
+  - Fixed type casting in the category selector
+- Fixed ESLint warnings and improved code quality

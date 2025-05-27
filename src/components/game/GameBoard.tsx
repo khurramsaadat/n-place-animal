@@ -23,9 +23,8 @@ const GameBoardComponent: ForwardRefRenderFunction<GameBoardRef, GameBoardProps>
   ref
 ) => {
   const gameProgress = useGameProgress();
-  const progress = isTrainingMode 
-    ? useTrainingProgressContext()
-    : gameProgress;
+  const trainingProgress = useTrainingProgressContext();
+  const progress = isTrainingMode ? trainingProgress : gameProgress;
   
   const { updateProgress } = progress;
   

@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 export default function LeaderboardPage() {
   return (
     <div className="py-12">
