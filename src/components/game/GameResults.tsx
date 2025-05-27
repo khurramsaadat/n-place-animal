@@ -1,5 +1,7 @@
 'use client';
 
+import CategoryIcon from '@/components/ui/CategoryIcon';
+
 interface GameResultsProps {
   answers: {
     name: string;
@@ -59,7 +61,10 @@ const GameResults = ({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {Object.entries(answers).map(([category, answer]) => (
             <div key={category} className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-sm text-gray-500 capitalize">{category}</p>
+              <div className="flex items-center gap-2 mb-1">
+                <CategoryIcon category={category as 'name' | 'place' | 'animal' | 'thing'} className="w-4 h-4 text-gray-500" />
+                <p className="text-sm text-gray-500 capitalize">{category}</p>
+              </div>
               <p className="text-lg font-medium text-gray-800">
                 {capitalizeFirstLetter(answer) || '-'}
               </p>

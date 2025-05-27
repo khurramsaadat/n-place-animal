@@ -1,16 +1,16 @@
 export default function RulesPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-purple-50 py-12">
+    <div className="py-12">
       <div className="max-w-4xl mx-auto px-4">
-        <h1 className="text-4xl font-bold text-purple-600 mb-8 text-center">
+        <h1 className="text-4xl font-bold text-purple-600 dark:text-purple-400 mb-8 text-center">
           How to Play
         </h1>
 
-        <div className="bg-white rounded-lg shadow-lg p-6 space-y-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 space-y-8">
           {/* Game Overview */}
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Game Overview</h2>
-            <p className="text-gray-600 mb-4">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Game Overview</h2>
+            <p className="text-gray-600 dark:text-gray-300 mb-4">
               Name Place Animal Thing is a word game where you need to think of words
               starting with a given letter for different categories. Think fast and be
               creative!
@@ -19,9 +19,9 @@ export default function RulesPage() {
 
           {/* Game Rules */}
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Game Rules</h2>
-            <div className="prose prose-purple max-w-none">
-              <ol className="list-decimal list-inside space-y-4 text-gray-600">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Game Rules</h2>
+            <div className="prose prose-purple dark:prose-invert max-w-none">
+              <ol className="list-decimal list-inside space-y-4 text-gray-600 dark:text-gray-300">
                 <li>
                   <span className="font-medium">Starting the Game:</span>
                   <ul className="list-disc list-inside ml-6 mt-2 space-y-2">
@@ -75,10 +75,10 @@ export default function RulesPage() {
 
           {/* Game Modes */}
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Game Modes</h2>
-            <div className="space-y-4 text-gray-600">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Game Modes</h2>
+            <div className="space-y-4 text-gray-600 dark:text-gray-300">
               <div>
-                <h3 className="font-medium text-lg text-purple-600">Regular Mode</h3>
+                <h3 className="font-medium text-lg text-purple-600 dark:text-purple-400">Regular Mode</h3>
                 <ul className="list-disc list-inside ml-6 mt-2 space-y-2">
                   <li>50 seconds per round</li>
                   <li>Compete for high scores</li>
@@ -86,7 +86,7 @@ export default function RulesPage() {
                 </ul>
               </div>
               <div>
-                <h3 className="font-medium text-lg text-purple-600">Training Mode</h3>
+                <h3 className="font-medium text-lg text-purple-600 dark:text-purple-400">Training Mode</h3>
                 <ul className="list-disc list-inside ml-6 mt-2 space-y-2">
                   <li>60 seconds per round</li>
                   <li>Access to hints for each category</li>
@@ -99,8 +99,8 @@ export default function RulesPage() {
 
           {/* Tips for Success */}
           <section>
-            <h2 className="text-2xl font-semibold text-gray-800 mb-4">Tips for Success</h2>
-            <div className="bg-purple-50 rounded-lg p-6 text-gray-600">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Tips for Success</h2>
+            <div className="bg-purple-50 dark:bg-purple-900/30 rounded-lg p-6 text-gray-600 dark:text-gray-300">
               <ul className="list-disc list-inside space-y-3">
                 <li>Use training mode to practice difficult letters</li>
                 <li>Keep track of your category strengths and focus on improving weaker areas</li>
@@ -113,9 +113,9 @@ export default function RulesPage() {
           </section>
 
           {/* Additional Information */}
-          <section className="bg-gray-50 rounded-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">Additional Information</h2>
-            <div className="text-gray-600 space-y-2">
+          <section className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-6">
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4">Additional Information</h2>
+            <div className="text-gray-600 dark:text-gray-300 space-y-2">
               <p>• The game tracks your progress and maintains statistics in training mode</p>
               <p>• Letters are randomized and won't repeat until you refresh the page</p>
               <p>• Voice announcements guide you through the game</p>

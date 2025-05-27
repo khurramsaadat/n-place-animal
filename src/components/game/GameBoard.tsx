@@ -142,33 +142,28 @@ const GameBoardComponent: ForwardRefRenderFunction<GameBoardRef, GameBoardProps>
   }));
 
   return (
-    <div className="max-w-4xl mx-auto px-2 sm:px-4 py-2 sm:py-4 space-y-4 sm:space-y-6">
-      <div className="text-center">
+    <div className="max-w-4xl mx-auto px-2 sm:px-4 space-y-4 sm:space-y-6">
+      <div className="flex justify-between items-center -mt-2">
+        <div className="text-xs sm:text-sm text-gray-600">
+          Letters remaining: {26 - usedLettersRef.current.size}
+        </div>
         {(gameState === 'waiting' || gameState === 'finished' || gameState === 'no-letters') && (
           <>
             {gameState === 'no-letters' ? (
-              <div className="space-y-4">
-                <div className="text-red-600 font-medium">
-                  All letters have been used!
-                </div>
-                <button
-                  onClick={resetGame}
-                  className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
-                >
-                  Start New Round
-                </button>
-              </div>
+              <button
+                onClick={resetGame}
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold text-base sm:text-lg hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+              >
+                Start New Round
+              </button>
             ) : (
               <button
                 onClick={startNewGame}
-                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-200 shadow-lg mb-4 sm:mb-6"
+                className="bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-6 sm:px-8 py-2 sm:py-3 rounded-full font-semibold text-base sm:text-lg hover:from-purple-600 hover:to-indigo-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
               >
                 {gameState === 'finished' ? 'Play Again' : `Start ${isTrainingMode ? 'Practice' : 'Game'}`}
               </button>
             )}
-            <div className="text-xs sm:text-sm text-gray-600 mt-1 sm:mt-2">
-              Letters remaining: {26 - usedLettersRef.current.size}
-            </div>
           </>
         )}
       </div>

@@ -105,63 +105,63 @@ export const hintsDatabase: HintsDatabase = {
     thing: ['Paint', 'Paper', 'Pen', 'Pencil', 'Phone', 'Piano', 'Pillow']
   },
   'Q': {
-    name: ['Quincy', 'Quinn', 'Quinton', 'Qasim', 'Queenie'],
-    place: ['Qatar', 'Quebec', 'Queensland', 'Quezon City'],
-    animal: ['Quail', 'Quokka', 'Quoll'],
-    thing: ['Quilt', 'Quarter', 'Queen (chess)', 'Quiver', 'Quiz']
+    name: ['Quincy', 'Quinn', 'Quinton', 'Qasim', 'Queenie', 'Quentin', 'Quinlan', 'Qiana', 'Quade', 'Quannah'],
+    place: ['Qatar', 'Quebec', 'Queensland', 'Quezon City', 'Qingdao', 'Qom', 'Quito', 'Queenstown', 'Qinhuangdao', 'Quanzhou'],
+    animal: ['Quail', 'Quokka', 'Quoll', 'Queen Butterfly', 'Queen Snake', 'Queen Angelfish', 'Queen Triggerfish', 'Queen Conch', 'Quetzal', 'Quahog'],
+    thing: ['Quilt', 'Quarter', 'Queen (chess)', 'Quiver', 'Quiz', 'Quiche', 'Quicksand', 'Quill', 'Quartz', 'Quinoa']
   },
   'R': {
-    name: ['Rachel', 'Ralph', 'Raymond', 'Rebecca', 'Richard', 'Robert', 'Rose', 'Ryan'],
-    place: ['Rabat', 'Raleigh', 'Rome', 'Romania', 'Russia', 'Rwanda'],
-    animal: ['Rabbit', 'Raccoon', 'Rat', 'Raven', 'Rhinoceros', 'Robin'],
-    thing: ['Radio', 'Rainbow', 'Ring', 'Robot', 'Rocket', 'Rope', 'Ruler']
+    name: ['Rachel', 'Ralph', 'Raymond', 'Rebecca', 'Richard', 'Robert', 'Rose', 'Ryan', 'Raphael', 'Regina', 'Roland', 'Ruby', 'Russell', 'Ruth'],
+    place: ['Rabat', 'Raleigh', 'Rome', 'Romania', 'Russia', 'Rwanda', 'Reykjavik', 'Rio de Janeiro', 'Rotterdam', 'Riyadh', 'Richmond', 'Riga'],
+    animal: ['Rabbit', 'Raccoon', 'Rat', 'Raven', 'Rhinoceros', 'Robin', 'Red Panda', 'Reindeer', 'Roadrunner', 'Rooster', 'Rattlesnake', 'Ray'],
+    thing: ['Radio', 'Rainbow', 'Ring', 'Robot', 'Rocket', 'Rope', 'Ruler', 'Radar', 'Raft', 'Ramp', 'Remote', 'Router']
   },
   'S': {
-    name: ['Samuel', 'Sarah', 'Scott', 'Sean', 'Sharon', 'Simon', 'Sophie', 'Steven'],
-    place: ['Sacramento', 'Santiago', 'Scotland', 'Seoul', 'Singapore', 'Spain', 'Sydney'],
-    animal: ['Salamander', 'Salmon', 'Seal', 'Shark', 'Sheep', 'Snake', 'Spider'],
-    thing: ['Saddle', 'Salt', 'Scissors', 'Ship', 'Shoe', 'Soap', 'Socks']
+    name: ['Samuel', 'Sarah', 'Scott', 'Sean', 'Sharon', 'Simon', 'Sophie', 'Steven', 'Sophia', 'Sebastian', 'Stella', 'Stuart'],
+    place: ['Sacramento', 'Santiago', 'Scotland', 'Seoul', 'Singapore', 'Spain', 'Sydney', 'Shanghai', 'Stockholm', 'Seattle', 'Sao Paulo', 'Switzerland'],
+    animal: ['Salamander', 'Salmon', 'Seal', 'Shark', 'Sheep', 'Snake', 'Spider', 'Squirrel', 'Starfish', 'Swan', 'Scorpion', 'Sloth'],
+    thing: ['Saddle', 'Salt', 'Scissors', 'Ship', 'Shoe', 'Soap', 'Socks', 'Satellite', 'Scanner', 'Screen', 'Speaker', 'Stapler']
   },
   'T': {
-    name: ['Taylor', 'Thomas', 'Timothy', 'Tony', 'Tracy', 'Tyler'],
-    place: ['Taiwan', 'Tanzania', 'Texas', 'Thailand', 'Tokyo', 'Toronto', 'Turkey'],
-    animal: ['Tiger', 'Toad', 'Turkey', 'Turtle'],
-    thing: ['Table', 'Telephone', 'Television', 'Tent', 'Toaster', 'Train', 'Tree']
+    name: ['Taylor', 'Thomas', 'Timothy', 'Tony', 'Tracy', 'Tyler', 'Tara', 'Theodore', 'Tessa', 'Trevor', 'Tristan', 'Tiffany'],
+    place: ['Taiwan', 'Tanzania', 'Texas', 'Thailand', 'Tokyo', 'Toronto', 'Turkey', 'Taipei', 'Tehran', 'Tibet', 'Tunisia', 'Turin'],
+    animal: ['Tiger', 'Toad', 'Turkey', 'Turtle', 'Tarantula', 'Tapir', 'Termite', 'Toucan', 'Tuna', 'Tasmanian Devil'],
+    thing: ['Table', 'Telephone', 'Television', 'Tent', 'Toaster', 'Train', 'Tree', 'Tablet', 'Telescope', 'Thermometer', 'Torch', 'Tractor']
   },
   'U': {
-    name: ['Ulysses', 'Uma', 'Ursula', 'Usama', 'Umar'],
-    place: ['Uganda', 'Ukraine', 'Uruguay', 'Utah', 'Uzbekistan'],
-    animal: ['Uakari', 'Umbrella Bird', 'Unicorn', 'Urial'],
-    thing: ['Umbrella', 'Uniform', 'Ukulele', 'Utensils']
+    name: ['Ulysses', 'Uma', 'Ursula', 'Usama', 'Umar', 'Ulrich', 'Umberto', 'Unity', 'Urban', 'Uriah'],
+    place: ['Uganda', 'Ukraine', 'Uruguay', 'Utah', 'Uzbekistan', 'Uppsala', 'Udaipur', 'Ulaanbaatar', 'Ulm', 'Urumqi'],
+    animal: ['Uakari', 'Umbrella Bird', 'Unicorn', 'Urial', 'Urutu', 'Uguisu', 'Upupa', 'Urchin', 'Urubu', 'Umbrellabird'],
+    thing: ['Umbrella', 'Uniform', 'Ukulele', 'Utensils', 'USB', 'Unicycle', 'Urn', 'Underwear', 'Upholstery', 'Uranium']
   },
   'V': {
-    name: ['Valerie', 'Victor', 'Victoria', 'Vincent', 'Virginia'],
-    place: ['Vancouver', 'Vatican City', 'Venezuela', 'Venice', 'Vienna', 'Vietnam'],
-    animal: ['Vampire Bat', 'Viper', 'Vulture'],
-    thing: ['Vacuum', 'Van', 'Vase', 'Violin', 'Volcano']
+    name: ['Valerie', 'Victor', 'Victoria', 'Vincent', 'Virginia', 'Valentina', 'Vanessa', 'Vera', 'Vernon', 'Violet'],
+    place: ['Vancouver', 'Vatican City', 'Venezuela', 'Venice', 'Vienna', 'Vietnam', 'Valencia', 'Valletta', 'Versailles', 'Vladivostok'],
+    animal: ['Vampire Bat', 'Viper', 'Vulture', 'Vicuna', 'Vole', 'Vervet Monkey', 'Vinegaroon', 'Vaquita', 'Velvet Worm', 'Violet Snail'],
+    thing: ['Vacuum', 'Van', 'Vase', 'Violin', 'Volcano', 'Vest', 'Video Game', 'Vinegar', 'Visor', 'Voice Recorder']
   },
   'W': {
-    name: ['Walter', 'Warren', 'Wayne', 'William', 'Wendy', 'Winston'],
-    place: ['Wales', 'Warsaw', 'Washington', 'Wellington', 'Wisconsin', 'Wyoming'],
-    animal: ['Walrus', 'Warthog', 'Whale', 'Wolf', 'Wombat', 'Woodpecker'],
-    thing: ['Wagon', 'Wall', 'Wallet', 'Watch', 'Window', 'Wire']
+    name: ['Walter', 'Warren', 'Wayne', 'William', 'Wendy', 'Winston', 'Wade', 'Wallace', 'Wesley', 'Willow'],
+    place: ['Wales', 'Warsaw', 'Washington', 'Wellington', 'Wisconsin', 'Wyoming', 'Wuhan', 'Winnipeg', 'Wollongong', 'Windhoek'],
+    animal: ['Walrus', 'Warthog', 'Whale', 'Wolf', 'Wombat', 'Woodpecker', 'Wasp', 'Weasel', 'Wildebeest', 'Wolverine'],
+    thing: ['Wagon', 'Wall', 'Wallet', 'Watch', 'Window', 'Wire', 'Waffle', 'Wand', 'Whistle', 'Wrench']
   },
   'X': {
-    name: ['Xavier', 'Xerxes', 'Ximena', 'Xiomar'],
-    place: ['Xi\'an', 'Xiamen', 'Xinjiang'],
-    animal: ['X-Ray Fish', 'Xerus'],
-    thing: ['Xylophone', 'X-Ray', 'Xbox']
+    name: ['Xavier', 'Xerxes', 'Ximena', 'Xiomar', 'Xander', 'Xiomara', 'Xico', 'Xavi', 'Xenon', 'Xena'],
+    place: ['Xi\'an', 'Xiamen', 'Xinjiang', 'Xochimilco', 'Xuzhou', 'Xalapa', 'Xiangyang', 'Xining', 'Xinyu', 'Xuancheng'],
+    animal: ['X-Ray Fish', 'Xerus', 'Xenops', 'Xenopus', 'Xantus Murrelet', 'Xeme', 'Xoloitzcuintli', 'Xenarthra', 'Xiphosura', 'Xiphias'],
+    thing: ['Xylophone', 'X-Ray', 'Xbox', 'Xenon Lamp', 'Xerograph', 'XML', 'Xanadu', 'Xebec', 'Xerox', 'Xyster']
   },
   'Y': {
-    name: ['Yakov', 'Yolanda', 'Yuri', 'Yasmine', 'Yves'],
-    place: ['Yale', 'Yemen', 'Yokohama', 'York', 'Yukon'],
-    animal: ['Yak', 'Yellow Jacket', 'Yorkshire Terrier'],
-    thing: ['Yacht', 'Yam', 'Yarn', 'Yo-yo', 'Yogurt']
+    name: ['Yakov', 'Yolanda', 'Yuri', 'Yasmine', 'Yves', 'Yara', 'Yoshi', 'Yale', 'Yoko', 'Yusuf'],
+    place: ['Yale', 'Yemen', 'Yokohama', 'York', 'Yukon', 'Yalta', 'Yangon', 'Yerevan', 'Yokosuka', 'Yunnan'],
+    animal: ['Yak', 'Yellow Jacket', 'Yorkshire Terrier', 'Yellowhammer', 'Yapok', 'Yabby', 'Yellow-eyed Penguin', 'Yellow Mongoose', 'Yellowfin Tuna', 'Yellow-bellied Marmot'],
+    thing: ['Yacht', 'Yam', 'Yarn', 'Yo-yo', 'Yogurt', 'Yoke', 'Yucca', 'Yearbook', 'Yardstick', 'Yurt']
   },
   'Z': {
-    name: ['Zachary', 'Zara', 'Zeus', 'Zoe', 'Zack'],
-    place: ['Zagreb', 'Zambia', 'Zimbabwe', 'Zurich'],
-    animal: ['Zebra', 'Zebu', 'Zorilla'],
-    thing: ['Zipper', 'Zucchini', 'Zamboni', 'Zero']
+    name: ['Zachary', 'Zara', 'Zeus', 'Zoe', 'Zack', 'Zelda', 'Zander', 'Zena', 'Ziggy', 'Zion'],
+    place: ['Zagreb', 'Zambia', 'Zimbabwe', 'Zurich', 'Zanzibar', 'Zaragoza', 'Zhengzhou', 'Zibo', 'Zion', 'Zurich'],
+    animal: ['Zebra', 'Zebu', 'Zorilla', 'Zebra Finch', 'Zebra Shark', 'Zebra Dove', 'Zebrafish', 'Zone-tailed Hawk', 'Zebra Duiker', 'Zebra Moray'],
+    thing: ['Zipper', 'Zucchini', 'Zamboni', 'Zero', 'Zinc', 'Zither', 'Zodiac', 'Zoom Lens', 'Zeppelin', 'Zigzag']
   }
 }; 

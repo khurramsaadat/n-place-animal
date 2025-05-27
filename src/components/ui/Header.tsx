@@ -95,7 +95,7 @@ const Header = ({ onLogoClick }: HeaderProps) => {
 
           {/* Mobile menu button */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-purple-50 transition-colors duration-200"
+            className="md:hidden p-2 rounded-full bg-purple-50 hover:bg-purple-100 transition-colors duration-200"
             onClick={toggleMenu}
             aria-label="Toggle menu"
           >
@@ -138,40 +138,31 @@ const Header = ({ onLogoClick }: HeaderProps) => {
         {/* Mobile Navigation */}
         <div 
           className={`
-            fixed inset-x-0 top-[73px] bg-white md:hidden transition-all duration-300 ease-in-out transform
+            fixed inset-x-0 top-[73px] md:hidden transition-all duration-300 ease-in-out transform
             ${isMenuOpen ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}
           `}
         >
-          <div className="container mx-auto px-4 py-4 shadow-lg rounded-b-2xl border-t border-gray-100">
-            {navLinks.map((link, index) => (
-              <div key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`
-                    flex items-center space-x-3 py-3 px-4 rounded-xl transition-all duration-200
-                    ${isActive(link.href)
-                      ? 'bg-purple-50 text-purple-600'
-                      : 'text-gray-600 hover:bg-purple-50 hover:text-purple-600'
-                    }
-                  `}
-                >
-                  <span className="w-5">
-                    {link.icon}
-                  </span>
-                  <span className="font-medium">{link.label}</span>
-                  {isActive(link.href) && (
-                    <span className="ml-auto">
-                      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  )}
-                </Link>
-                {index < navLinks.length - 1 && (
-                  <div className="h-[1px] mx-4 bg-gray-100" />
-                )}
+          <div className="bg-white/80 backdrop-blur-lg border-t border-purple-100">
+            <div className="container mx-auto p-4">
+              <div className="grid grid-cols-2 gap-3">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`
+                      flex items-center space-x-3 p-3 rounded-xl transition-all duration-200
+                      ${isActive(link.href)
+                        ? 'bg-purple-100 text-purple-600'
+                        : 'hover:bg-purple-50 text-gray-600 hover:text-purple-600'
+                      }
+                    `}
+                  >
+                    <span className="w-5">{link.icon}</span>
+                    <span className="font-medium">{link.label}</span>
+                  </Link>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </nav>
