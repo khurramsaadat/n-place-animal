@@ -62,7 +62,7 @@ const InputFields = ({ currentLetter, answers, onAnswerChange, isDisabled = fals
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6">
       {Object.entries(answers).map(([field, value]) => (
         <div key={field} className="relative">
-          <label className={`block text-sm font-semibold mb-1 sm:mb-2 capitalize flex items-center gap-1 ${categoryColors[field as keyof Answers].label}`}>
+          <label className={`text-sm font-semibold mb-1 sm:mb-2 capitalize flex items-center gap-1 ${categoryColors[field as keyof Answers].label}`}>
             <CategoryIcon category={field as keyof Answers} className="w-4 h-4" />
             {field}
           </label>
